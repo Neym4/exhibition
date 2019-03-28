@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MonitorManagment</class>
+ <widget class="QMainWindow" name="MonitorManagment">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MonitorManagment</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>441</x>
+      <y>81</y>
+      <width>500</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>500</width>
+      <height>400</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>500</width>
+      <height>400</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="ProjectorIndicator">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>52</x>
+      <y>127</y>
+      <width>77</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ПРОЕКТОР</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>52</x>
+      <y>82</y>
+      <width>140</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Проектор</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="ScreenIndicator_2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>52</x>
+      <y>371</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>2 Экран Включить?</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="ScreenIndicator_1">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>52</x>
+      <y>342</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1 Экран Включить?</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="ScreenIndicator_3">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>52</x>
+      <y>400</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>3 Экран Включить?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>51</x>
+      <y>248</y>
+      <width>155</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Главный зал</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonOn">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Включить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonOff">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выключить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM1Yes">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Да</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM1No">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>340</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нет</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM3Yes">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Да</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM3No">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нет</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM2Yes">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Да</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonM2No">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нет</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonAllMOn">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>260</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Включить все мониторы</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonAllMOff">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>290</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выключить все мониторы</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuRe">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <addaction name="action_5"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Служба техподдержки</string>
+    </property>
+    <widget class="QMenu" name="menu_2">
+     <property name="title">
+      <string>Отправить Дмитрию сообщение</string>
+     </property>
+     <addaction name="action_7"/>
+     <addaction name="action_8"/>
+    </widget>
+    <addaction name="menu_2"/>
+   </widget>
+   <addaction name="menuRe"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>Тест</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>&quot;Вышла ошибка&quot;</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>&quot;Монитор или проектор не запустился&quot;</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
