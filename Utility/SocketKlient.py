@@ -6,9 +6,8 @@ print('connect')
 data = sock.recv(1024)
 print(data)
 sock.send(b"Hello Daniel!")
+print("Hello Daniel!")
 
-if data == b'run_video':
-    print('runvideo')
 
 
 
@@ -23,10 +22,11 @@ class KlientRPI ():
     def acceptMessege(self):
         print()
 
-    def stop(self):
+    def stopVideo(self):
         #pygame.mixer.music.pause();
-        global set
-        set = 0  # set =0 ,means song is  not playing currently
+        #global set
+        #set = 0  # set =0 ,means song is  not playing currently
+        print ('stop_Video')
 
     def playVideo (self):
          #comm =  "/home/aayushshivam7/python\ projects/pygam_vlc.py "
@@ -34,14 +34,14 @@ class KlientRPI ():
         #global player
         #player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\МЫ.mp4")
         #player.play()
-        print('Print video')
+        print('Play video')
 
-    def StVid(self,event):
-
-        global file
-        player.stop()
-        file = ""
-    print()
+    # def StVid(self,event):
+    #
+    #     global file
+    #     player.stop()
+    #     file = ""
+    # print()
 
     def SdisconnRpi(self):
         print()
@@ -52,6 +52,23 @@ class KlientRPI ():
     def Sturnofrscreen (self):
         print()
 
-#t = KlientRPI()
-#t.playVideo('jj')
-# sock.close()
+    def Disconnect (self):
+        print('disconnect')
+
+    def off_raspberry (self):
+        print("off_raspberry")
+
+t = KlientRPI()
+if data == b'run_video':
+    t.playVideo()
+if data == b'stop_video':
+    t.stopVideo()
+if data == b'off_raspberry':
+    t.off_raspberry()
+
+while True:
+    sock.connect(('192.168.1.184', 9090))
+    if data == b'Disconnect':
+        t.Disconnect()
+
+try:
