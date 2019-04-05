@@ -1,6 +1,10 @@
 import socket
 
-# # import vlc
+
+#import vlc
+import subprocess
+
+
 # sock = socket.socket()
 # sock.connect(('192.168.1.184', 9090))
 # print('connect')
@@ -24,14 +28,15 @@ class KlientRPI():
         # pygame.mixer.music.pause();
         # global set
         # set = 0  # set =0 ,means song is  not playing currently
-        print('stop_Video')
+        print('stop_video')
 
     def playVideo(self):
         # comm =  "/home/aayushshivam7/python\ projects/pygam_vlc.py "
         # call(["python","pygam_vlc.py","abc.mp4"])
         # global player
-        # player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\МЫ.mp4")
-        # player.play()
+        #player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4")
+        #player.play()
+        #subprocess.call(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4", shell=True)
         print('Play video')
 
     # def StVid(self,event):
@@ -56,8 +61,10 @@ class KlientRPI():
     def off_raspberry(self):
         print("off_raspberry")
 
+
 t = KlientRPI()
 
+t.playVideo()
 
 def takeMessage(message):
     if message == b'run_video':
@@ -92,4 +99,5 @@ if __name__ == '__main__':
             print("error BE: " + str(be))
         else:
             pass
+
 
