@@ -1,20 +1,6 @@
 import socket
+import subprocess
 
-
-# import vlc
-# import subprocess
-
-
-# sock = socket.socket()
-# sock.connect(('192.168.1.184', 9090))
-# print('connect')
-# data = sock.recv(1024)
-# print(data)
-# sock.send(b"Hello Daniel!")
-# print("Hello Daniel!")
-
-
-# print(data)
 
 class KlientRPI():
     def playVideo(self):
@@ -30,48 +16,23 @@ class KlientRPI():
         print()
 
     def stopVideoM1(self):
-        # pygame.mixer.music.pause();
-        # global set
-        # set = 0  # set =0 ,means song is  not playing currently
+
         print('stop_video')
 
     def runVideoM1(self):
-        # comm =  "/home/aayushshivam7/python\ projects/pygam_vlc.py "
-        # call(["python","pygam_vlc.py","abc.mp4"])
-        # global player
-        # player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4")
-        # player.play()
-        # subprocess.call(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4", shell=True)
+        subprocess.call("/home/pi/Documents/exhibition/SHVideo2.py")
         print('runVideoM1')
 
     def stopVideoM2(self):
-        # pygame.mixer.music.pause();
-        # global set
-        # set = 0  # set =0 ,means song is  not playing currently
         print('stopVideoM2')
 
     def playVideoM2(self):
-        # comm =  "/home/aayushshivam7/python\ projects/pygam_vlc.py "
-        # call(["python","pygam_vlc.py","abc.mp4"])
-        # global player
-        # player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4")
-        # player.play()
-        # subprocess.call(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4", shell=True)
         print('playVideoM2')
 
     def stopVideoM3(self):
-        # pygame.mixer.music.pause();
-        # global set
-        # set = 0  # set =0 ,means song is  not playing currently
         print('stopVideoM3')
 
     def playVideoM3(self):
-        # comm =  "/home/aayushshivam7/python\ projects/pygam_vlc.py "
-        # call(["python","pygam_vlc.py","abc.mp4"])
-        # global player
-        # player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4")
-        # player.play()
-        # subprocess.call(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4", shell=True)
         print('playVideoM3')
 
     def playProjector(self):
@@ -79,13 +40,6 @@ class KlientRPI():
 
     def stopProjector(self):
         print('stop_projector')
-
-    # def StVid(self,event):
-    #
-    #     global file
-    #     player.stop()
-    #     file = ""
-    # print()
 
     def SdisconnRpi(self):
         print()
