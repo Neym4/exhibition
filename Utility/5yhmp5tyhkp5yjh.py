@@ -1,3 +1,3 @@
 import subprocess
 
-play = subprocess.call("C:\Users\admin\Desktop\sdfpidshjfkl\startVideo.sh")
+play = subprocess.call(r"C:\Users\admin\Desktop\sdfpidshjfkl\startVideo.sh")
