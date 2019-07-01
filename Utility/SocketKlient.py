@@ -1,5 +1,6 @@
 import socket
 import subprocess
+from threading import Thread
 import os
 
 
@@ -71,9 +72,10 @@ class KlientRPI():
 
 t = KlientRPI()
 
+
+
 m1 = False
-def takeMessage(message):
-    global m1
+def takeMessage(message, m1, m2, m3, m4):
 
     if message == b"run_video":
         t.playVideo()
@@ -158,6 +160,7 @@ def takeMessage(message):
     else:
         print("Error: " + message)
 
+variable = Thread(target= takeMessage, args= m1, m2, m3, m4,)
 
 if __name__ == '__main__':
 
