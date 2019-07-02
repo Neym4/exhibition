@@ -1,4 +1,5 @@
-import vlc
+#from threading import Thread
 
-player = vlc.MediaPlayer(r"C:\Users\admin\Desktop\sdfpidshjfkl\we.mp4")
-player.play()
+def tmessag(message , tm):
+    print (message, tm)
+tmessag("Привет", 11)

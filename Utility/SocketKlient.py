@@ -8,7 +8,92 @@ import os
 pathVideo = '/home/pi/Videos'
 
 
-class KlientRPI():
+class KlientRPI:
+    def Swith(self, message):
+        if message == b"run_video":
+            self.playVideo()
+        elif message == b"stop_video":
+            self.stopVideo()
+        elif message == b"off_raspberry":
+            self.off_raspberry()
+        elif message == b"run_projector":
+            m4 = True
+            if m4 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.playProjector(path)
+            else:
+                pass
+        elif message == b"stop_projector":
+            m4 = False
+            if m4 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.playProjector(path)
+            else:
+                pass
+        elif message == b"run_monitor1":
+            print("run_monitor1", m1)
+            m1 = True
+            if m1 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM1(path)
+            else:
+                pass
+        elif message == b"run_monitor2":
+            m2 = True
+            if m2 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM2(path)
+            else:
+                pass
+        elif message == b"run_monitor3":
+            m3 = True
+            if m3 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM3(path)
+            else:
+                pass
+        elif message == b"stop_monitor1":
+            print("stop_monitor1", m1)
+            m1 = False
+            if m1 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM1(path)
+            else:
+                pass
+        elif message == b"stop_monitor2":
+            m2 = False
+            if m2 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM2(path)
+            else:
+                pass
+        elif message == b"stop_monitor3":
+            m3 = False
+            if m3 == True:
+                list = os.listdir(pathVideo)
+                for name in list:
+                    path = os.path.join(pathVideo, name)
+                    t.runVideoM3(path)
+            else:
+                pass
+        else:
+            print("Error: " + message)
+
+
     def playVideo(self):
         print('run_video')
 
@@ -162,6 +247,28 @@ def takeMessage(message, m1, m2, m3, m4):
 
 variable = Thread(target= takeMessage, args= m1, m2, m3, m4,)
 
+
+
+
+class klient(KlientRPI, Thread):
+    def __init__(self, sock):
+        super().__init__(self)
+        self.sock = sock
+
+    def run(self):
+        while True:
+            data = sock.recv(1024)
+            self.Swith(data)
+            print (data)
+
+    def stop(self):
+        print("stop load Image")
+        self.terminate()
+
+
+
+
+
 if __name__ == '__main__':
 
     r = True
@@ -175,14 +282,19 @@ if __name__ == '__main__':
             except TimeoutError as e:
                 sock = socket.socket()
                 print("error " + str(e))
+                if "objKlient" in locals():
+                    objKlient.stop()
+                else:
+                    print("objKlient - нет такой переменной")
             else:
-                while True:
-                    data = sock.recv(1024)
-                    # data.clean()
-                    takeMessage(data)
+                objKlient = klient(sock)
         except BaseException as be:
             sock = socket.socket()
             print("error BE: " + str(be))
+            if "objKlient" in locals():
+                objKlient.stop()
+            else:
+                print("objKlient - нет такой переменной")
         else:
             pass
 
