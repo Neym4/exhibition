@@ -1,301 +1,109 @@
 import socket
 import subprocess
-from threading import Thread
-import os
+from threading import Thread, Event
 
 
-# list_VIDEO = os.list_VIDEO(r"C:\Users\admin\Desktop\sdfpidshjfkl")
-pathVideo = '/home/pi/Videos'
+pathVideo = '/home/pi/Videos'  # Путь до папки с видео
 
 
 class KlientRPI:
+    '''Весь набор функционала'''
     def Swith(self, message):
+        print("command: ", message)
         if message == b"run_video":
-            self.playVideo()
-        elif message == b"stop_video":
-            self.stopVideo()
-        elif message == b"off_raspberry":
-            self.off_raspberry()
-        elif message == b"run_projector":
-            m4 = True
-            if m4 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.playProjector(path)
-            else:
-                pass
-        elif message == b"stop_projector":
-            m4 = False
-            if m4 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.playProjector(path)
-            else:
-                pass
-        elif message == b"run_monitor1":
-            print("run_monitor1", m1)
-            m1 = True
-            if m1 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM1(path)
-            else:
-                pass
-        elif message == b"run_monitor2":
-            m2 = True
-            if m2 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM2(path)
-            else:
-                pass
-        elif message == b"run_monitor3":
-            m3 = True
-            if m3 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM3(path)
-            else:
-                pass
-        elif message == b"stop_monitor1":
-            print("stop_monitor1", m1)
-            m1 = False
-            if m1 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM1(path)
-            else:
-                pass
-        elif message == b"stop_monitor2":
-            m2 = False
-            if m2 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM2(path)
-            else:
-                pass
-        elif message == b"stop_monitor3":
-            m3 = False
-            if m3 == True:
-                list = os.listdir(pathVideo)
-                for name in list:
-                    path = os.path.join(pathVideo, name)
-                    t.runVideoM3(path)
-            else:
-                pass
+            self.setM1()
         else:
-            print("Error: " + message)
+            self.stopVideoM1()
 
 
-    def playVideo(self):
-        print('run_video')
 
-    def stopVideo(self):
-        print('stop_video')
-
-    def sendTheMessage(self):
-        print()
-
-    def acceptMessege(self):
-        print()
 
     def stopVideoM1(self):
+        '''
+        Останавливает воспроизведение видео на мониторе 1
+        '''
         print('stop_video')
 
-    def runVideoM1(self, pathVideo):
+    def setM1(self, pathVideo, ):  #Запускает список видео на мониторе №1
         # subprocess.call("sh /home/pi/Documents/startVideo.sh %s" % pathVideo)
         subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
         print('runVideoM1')
 
-    def stopVideoM2(self):
+    def stopVideoM2(self):  #Останавливает воспроизведение видео на мониторе 2
 
         print('stopVideoM2')
 
-    def playVideoM2(self,pathVideo):
+    def playVideoM2(self,pathVideo):  #Запускает список видео на мониторе №2
         subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
         print('playVideoM2')
 
-    def stopVideoM3(self):
+    def stopVideoM3(self):  #Останавливает воспроизведение видео на мониторе 3
         print('stopVideoM3')
 
-    def playVideoM3(self,pathVideo):
+    def playVideoM3(self,pathVideo):  #Запускает список видео на мониторе №3
         subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
 
         print('playVideoM3')
 
-    def playProjector(self,pathVideo):
+    def playProjector(self,pathVideo):  #Запускает список видео на проекторе
         subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
 
         print('run_projector')
 
-    def stopProjector(self):
+    def stopProjector(self):  #Останавливает воспроизведение видео на проеторе
         print('stop_projector')
 
 
-    def SdisconnRpi(self):
-        print()
-
-    def conn(self):
-        print()
-
-    def Sturnofrscreen(self):
-        print()
-
-    def Disconnect(self):
-        print('disconnect')
-
-    def off_raspberry(self):
-        print("off_raspberry")
 
 
-t = KlientRPI()
+class klient(Thread, KlientRPI):  #Класс поток
+    def __init__(self, sock, eventStop):
+
+        Thread.__init__(self)
+        self.sock = sock  # Из грязи в книзи
+        self.eventStop = eventStop  # Из грязи в книзи
 
 
+    def run(self):  # Запуск и остановка потока
+        print("___________________Start potok___________________")
+        while self.eventStop.is_set():  #
 
-m1 = False
-def takeMessage(message, m1, m2, m3, m4):
-
-    if message == b"run_video":
-        t.playVideo()
-    elif message == b"stop_video":
-        t.stopVideo()
-    elif message == b"off_raspberry":
-        t.off_raspberry()
-    elif message == b"run_projector":
-        m4 = True
-        if m4 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.playProjector(path)
-        else:
-            pass
-    elif message == b"stop_projector":
-        m4 = False
-        if m4 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.playProjector(path)
-        else:
-            pass
-    elif message == b"run_monitor1":
-        print("run_monitor1", m1)
-        m1 = True
-        if m1 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM1(path)
-        else:
-            pass
-    elif message == b"run_monitor2":
-        m2 = True
-        if m2 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM2(path)
-        else:
-            pass
-    elif message == b"run_monitor3":
-        m3 = True
-        if m3 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM3(path)
-        else:
-            pass
-    elif message == b"stop_monitor1":
-        print("stop_monitor1", m1)
-        m1 = False
-        if m1 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM1(path)
-        else:
-            pass
-    elif message == b"stop_monitor2":
-        m2 = False
-        if m2 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM2(path)
-        else:
-            pass
-    elif message == b"stop_monitor3":
-        m3 = False
-        if m3 == True:
-            list = os.listdir(pathVideo)
-            for name in list:
-                path = os.path.join(pathVideo, name)
-                t.runVideoM3(path)
-        else:
-            pass
-    else:
-        print("Error: " + message)
-
-variable = Thread(target= takeMessage, args= m1, m2, m3, m4,)
-
-
-
-
-class klient(KlientRPI, Thread):
-    def __init__(self, sock):
-        super().__init__(self)
-        self.sock = sock
-
-    def run(self):
-        while True:
             data = sock.recv(1024)
+            if not data:
+                continue
             self.Swith(data)
-            print (data)
-
-    def stop(self):
-        print("stop load Image")
-        self.terminate()
-
-
-
+        print("___________________Stop potok___________________")
 
 
 if __name__ == '__main__':
 
-    r = True
-    sock = socket.socket()
-    while r:
+    sock = socket.socket()  #Создаём сокет
+    eventStop = Event()  #Создаём логические сигналы
+    eventStop.set()  #True
+    while True:
         try:
             try:
                 print("Повтор подключения")
-                sock.connect(('192.168.1.56', 9090))
+                sock.connect(('192.168.1.56', 9090))  #Подключаемся к главному компу
                 print('try connect')
-            except TimeoutError as e:
-                sock = socket.socket()
+            except TimeoutError as e:  #Отлавливаем временную ошибку
+                sock = socket.socket()  #Создаём сокет
                 print("error " + str(e))
-                if "objKlient" in locals():
-                    objKlient.stop()
+                if "objKlient" in locals():  #Проверяем есть ли переменная objKlient
+                    eventStop.clear()  #False
                 else:
                     print("objKlient - нет такой переменной")
             else:
-                objKlient = klient(sock)
-        except BaseException as be:
-            sock = socket.socket()
+                eventStop.set()  # True
+                objKlient = klient(sock, eventStop)  #Создаём объект класса и передаём ему аргументы(текущие соединение и сигнал на остановку)
+                objKlient.start()  #Запускаем поток
+                objKlient.join()  #Ждёт пока закончится поток(чтобы не перескакивал на след строчку
+        except BaseException as be:  ##Отлавливаем базываю ошибку
+            sock = socket.socket()  #Создаём сокет
             print("error BE: " + str(be))
-            if "objKlient" in locals():
-                objKlient.stop()
+            if "objKlient" in locals():  #Проверяем есть ли переменная objKlient
+                eventStop.clear()  #False
             else:
                 print("objKlient - нет такой переменной")
         else:
             pass
-
-

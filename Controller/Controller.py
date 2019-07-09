@@ -75,12 +75,3 @@ class Controller:
     def onProjector1(self): #Включить 1 проектор
 
         print ("Проектор 1 включен")
-        #self._view.pushButtonM1Yes.connect(self.onClickButton)
-
-
-
-
-
-
-    #def offProjector(self):
-
