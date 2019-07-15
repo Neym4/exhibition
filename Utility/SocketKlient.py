@@ -3,19 +3,22 @@ import subprocess
 from threading import Thread, Event
 
 
-pathVideo = '/home/pi/Videos'  # Путь до папки с видео
+pathVideo = r'/home/pi/Videos'  # Путь до папки с видео
 
 
 class KlientRPI:
+
     '''Весь набор функционала'''
     def Swith(self, message):
         print("command: ", message)
-        if message == b"run_video":
+        if message == b"run_monitor1 ":
             self.setM1()
         else:
-            self.stopVideoM1()
+            self.setM1()
 
-
+        if message == b'run_monitor2':
+            self.setM2
+        else:
 
 
     def stopVideoM1(self):
@@ -24,34 +27,35 @@ class KlientRPI:
         '''
         print('stop_video')
 
-    def setM1(self, pathVideo, ):  #Запускает список видео на мониторе №1
-        # subprocess.call("sh /home/pi/Documents/startVideo.sh %s" % pathVideo)
-        subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-        print('runVideoM1')
+    def setM1(self, mod1:bool):  #Запускает список видео на мониторе №1
+        if mod1:
+            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
+            pidM1 = subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo]).pid
+            print('runVideoM1',pidM1)
+        else:
+            print("stopM1")
 
-    def stopVideoM2(self):  #Останавливает воспроизведение видео на мониторе 2
 
-        print('stopVideoM2')
+    def setM2(self,pathVideo, mod2):  #Запускает список видео на мониторе №2
+        if mod2 == True:
+            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
+            print('runVideoM2')
+        else:
+            print("stopM4")
 
-    def playVideoM2(self,pathVideo):  #Запускает список видео на мониторе №2
-        subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-        print('playVideoM2')
+    def setM3(self,pathVideo, mod3):  #Запускает список видео на мониторе №3
+        if mod3 == True:
+            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
+            print('runVideoM3')
+        else:
+            print("stopM3")
 
-    def stopVideoM3(self):  #Останавливает воспроизведение видео на мониторе 3
-        print('stopVideoM3')
-
-    def playVideoM3(self,pathVideo):  #Запускает список видео на мониторе №3
-        subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-
-        print('playVideoM3')
-
-    def playProjector(self,pathVideo):  #Запускает список видео на проекторе
-        subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-
-        print('run_projector')
-
-    def stopProjector(self):  #Останавливает воспроизведение видео на проеторе
-        print('stop_projector')
+    def playProjector(self,pathVideo, mod4):  #Запускает список видео на проекторе
+        if mod4 == True:
+            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
+            print('run_projector')
+        else:
+            print("stopM4")
 
 
 
