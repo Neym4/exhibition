@@ -1,6 +1,9 @@
 import socket
 import subprocess
 from threading import Thread, Event
+import os
+import signal
+import time
 
 
 pathVideo = r'/home/pi/Videos'  # Путь до папки с видео
@@ -8,54 +11,32 @@ pathVideo = r'/home/pi/Videos'  # Путь до папки с видео
 
 class KlientRPI:
 
+    def getListVideo(self):
+        global pathVideo
+        self.count = 0
+
+        self.list_video = os.listdir(pathVideo)
+        print("list_video", self.list_video)
+
     '''Весь набор функционала'''
     def Swith(self, message):
         print("command: ", message)
-        if message == b"run_monitor1 ":
-            self.setM1()
-        else:
-            self.setM1()
+        if message == b"run_monitor1":
+            self.runVideo()
 
-        if message == b'run_monitor2':
-            self.setM2
-        else:
-
-
-    def stopVideoM1(self):
-        '''
-        Останавливает воспроизведение видео на мониторе 1
-        '''
-        print('stop_video')
-
-    def setM1(self, mod1:bool):  #Запускает список видео на мониторе №1
-        if mod1:
-            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-            pidM1 = subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo]).pid
-            print('runVideoM1',pidM1)
-        else:
+        if message == b"stop_monitor1":
             print("stopM1")
 
+            while self.pid.poll() is None:  # Force kill if process is still alive
+                time.sleep(3)
+                os.killpg(self.pid.pid, signal.SIGKILL)
 
-    def setM2(self,pathVideo, mod2):  #Запускает список видео на мониторе №2
-        if mod2 == True:
-            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-            print('runVideoM2')
-        else:
-            print("stopM4")
+                print("Stop")
 
-    def setM3(self,pathVideo, mod3):  #Запускает список видео на мониторе №3
-        if mod3 == True:
-            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-            print('runVideoM3')
-        else:
-            print("stopM3")
 
-    def playProjector(self,pathVideo, mod4):  #Запускает список видео на проекторе
-        if mod4 == True:
-            subprocess.call(["/home/pi/Documents/startVideo.sh", pathVideo])
-            print('run_projector')
-        else:
-            print("stopM4")
+    def runVideo(self):
+        name = self.list_video[self.count]
+        self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
 
 
 
@@ -100,6 +81,9 @@ if __name__ == '__main__':
             else:
                 eventStop.set()  # True
                 objKlient = klient(sock, eventStop)  #Создаём объект класса и передаём ему аргументы(текущие соединение и сигнал на остановку)
+
+                objKlient.getListVideo()
+
                 objKlient.start()  #Запускаем поток
                 objKlient.join()  #Ждёт пока закончится поток(чтобы не перескакивал на след строчку
         except BaseException as be:  ##Отлавливаем базываю ошибку
