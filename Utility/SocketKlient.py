@@ -6,6 +6,7 @@ import signal
 import time
 
 
+
 pathVideo = r'/home/pi/Videos'  # Путь до папки с видео
 
 
@@ -23,21 +24,27 @@ class KlientRPI:
         print("command: ", message)
         if message == b"run_monitor1":
             self.runVideo()
-
         if message == b"stop_monitor1":
             print("stopM1")
-
             while self.pid.poll() is None:  # Force kill if process is still alive
                 time.sleep(3)
                 os.killpg(self.pid.pid, signal.SIGKILL)
-
                 print("Stop")
 
 
     def runVideo(self):
-        name = self.list_video[self.count]
-        self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
-
+        print("______________________blyat______________________blyat")
+#создать цикл
+        try:
+            if self.pid.poll() is None:
+                print("None")
+            else:
+                self.count = self.count + 1
+                name = self.list_video[self.count]
+                self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
+        except AttributeError:
+            name = self.list_video[self.count]
+            self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
 
 
 
@@ -52,7 +59,6 @@ class klient(Thread, KlientRPI):  #Класс поток
     def run(self):  # Запуск и остановка потока
         print("___________________Start potok___________________")
         while self.eventStop.is_set():  #
-
             data = sock.recv(1024)
             if not data:
                 continue
