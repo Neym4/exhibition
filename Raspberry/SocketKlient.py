@@ -4,20 +4,16 @@ from threading import Thread, Event
 import os
 import signal
 import time
+import psutil
 
 
 
-pathVideo = r'/home/pi/Videos'  # Путь до папки с видео
 
+# pid1 = subprocess.Popen(["/home/pi/Documents/videoRun.py"])
+# # print("pid1 = ", pid1)
 
 class KlientRPI:
 
-    def getListVideo(self):
-        global pathVideo
-        self.count = 0
-
-        self.list_video = os.listdir(pathVideo)
-        print("list_video", self.list_video)
 
     '''Весь набор функционала'''
     def Swith(self, message):
@@ -26,25 +22,26 @@ class KlientRPI:
             self.runVideo()
         if message == b"stop_monitor1":
             print("stopM1")
-            while self.pid.poll() is None:  # Force kill if process is still alive
-                time.sleep(3)
-                os.killpg(self.pid.pid, signal.SIGKILL)
-                print("Stop")
+
+            p = psutil.Process(self.pid.pid)
+            p.terminate()  # or p.kill()
+
+            # while self.pid.poll() is None:  # Force kill if process is still alive
+            #     time.sleep(3)
+            #     os.killpg(self.pid.pid, signal.SIGKILL)
+            #     self.pid.kill()
+            #     print("Stop")
+
+
 
 
     def runVideo(self):
         print("______________________blyat______________________blyat")
-#создать цикл
-        try:
-            if self.pid.poll() is None:
-                print("None")
-            else:
-                self.count = self.count + 1
-                name = self.list_video[self.count]
-                self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
-        except AttributeError:
-            name = self.list_video[self.count]
-            self.pid = subprocess.Popen(["/home/pi/Documents/startVideo.sh", os.path.join(pathVideo, name)])
+
+        self.pid = subprocess.Popen(["python3", r"/home/pi/Documents/videoRun.py"])
+        print("pid=", self.pid)
+        print("pid.poll", self.pid.poll())
+        print("self.pid.pid", self.pid.pid)
 
 
 
@@ -87,8 +84,6 @@ if __name__ == '__main__':
             else:
                 eventStop.set()  # True
                 objKlient = klient(sock, eventStop)  #Создаём объект класса и передаём ему аргументы(текущие соединение и сигнал на остановку)
-
-                objKlient.getListVideo()
 
                 objKlient.start()  #Запускаем поток
                 objKlient.join()  #Ждёт пока закончится поток(чтобы не перескакивал на след строчку

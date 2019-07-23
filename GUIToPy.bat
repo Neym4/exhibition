@@ -1,1 +1,0 @@
-C:\Users\admin\PycharmProjects\exhibition\venv\Scripts\pyuic5 C:\Users\admin\PycharmProjects\exhibition\vievs\maintesr1.ui -o C:\Users\admin\PycharmProjects\exhibition\vievs\MainForm.py
